@@ -15,8 +15,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'email', 'password', 'phone', 'address',
     ];
+    public $timestamps = true;
 
     /**
      * The attributes that should be hidden for arrays.
@@ -24,6 +25,26 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','status',
     ];
+
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function order()
+    {
+        return$this->hasManyThrough(Order::class, Transaction::class);
+    }
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function rate()
+    {
+        return $this->hasMany(Rate::class);
+    }
 }
