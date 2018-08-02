@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', 'PageController@getHome');
+
+Route:: get('/',['as' => 'trang-chu', 'uses'=> 'PageController@getHome']);
+
+
